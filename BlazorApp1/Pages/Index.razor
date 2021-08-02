@@ -1,0 +1,63 @@
+@page "/"
+
+@using Syncfusion.Blazor.FileManager;
+@using Newtonsoft.Json  
+<div class="control-section">
+  <SfFileManager TValue="DirectoryContent" View="ViewType.Details">
+    <FileManagerEvents TValue="DirectoryContent"></FileManagerEvents>
+    <FileManagerDetailsViewSettings>
+      <FileManagerColumns>
+        <FileManagerColumn Field="Name" HeaderText="FileName"></FileManagerColumn>
+        <FileManagerColumn Field="DateModified" HeaderText="Date Modified">
+        </FileManagerColumn>
+        <FileManagerColumn Field="UrlValue">
+          <HeaderTemplate>
+            <span>URL Name</span>
+          </HeaderTemplate>
+          <Template>
+            @{
+              var data = (context as DirectoryContent);
+              <div>@data.UrlValue</div>
+            }
+          </Template>
+        </FileManagerColumn>
+      </FileManagerColumns>
+    </FileManagerDetailsViewSettings>
+    <FileManagerAjaxSettings Url="/api/Home/FileOperations"
+                             UploadUrl="/api/Home/Upload"
+                             DownloadUrl="/api/Home/Download"
+                             GetImageUrl="/api/Home/GetImage">
+    </FileManagerAjaxSettings>
+  </SfFileManager>
+</div>
+@code{
+    public class DirectoryContent
+    {
+      public FileManagerDirectoryContent[] Data { get; set; }
+      public bool ShowHiddenItems { get; set; }
+      public string SearchString { get; set; }
+      public bool CaseSensitive { get; set; }
+      public string[] RenameFiles { get; set; }
+      public string TargetPath { get; set; }
+      public string ParentId { get; set; }
+      public string FilterId { get; set; }
+      public string FilterPath { get; set; }
+      public string Id { get; set; }
+      public string Type { get; set; }
+      public bool IsFile { get; set; }
+      public bool HasChild { get; set; }
+      public string URL { get; set; }
+      public string UrlValue { get; set; }
+      public DateTime DateCreated { get; set; }
+      public DateTime DateModified { get; set; }
+      public string PreviousName { get; set; }
+      public long Size { get; set; }
+      public string Name { get; set; }
+      public string[] Names { get; set; }
+      public string NewName { get; set; }
+      public string Action { get; set; }
+      public string Path { get; set; }
+      public FileManagerDirectoryContent TargetData { get; set; }
+      public AccessPermission Permission { get; set; }
+    }
+}
